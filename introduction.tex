@@ -4,9 +4,55 @@
 
 \subsection{Presentation}
 
+The Pattern Recognition and Image Processing Laboratory (PRIP) is a research
+group of the Vienna University of Technology (TU Wien) and is part of the
+Computer Science department. The TU Wien is Austria's largest research and 
+educational institution in the field of technology and natural sciences.
+The Computer Science department is one of Europe's leading research and innovation 
+institutions. PRIP Laboratory is focused on advanced image representations and methods 
+that allow the structure of the image to become an essential part of recognition systems.
+Among the people working in the PRIP Laboratory are:
+
+\begin{itemize}
+    \item Prof. Walter G. Kropatsch, Head of the Group.
+    \item Dr. Jiří Hladůvka, My tutor.
+    \item Majid Banaeyan, PhD student.
+    \item Darshan Batavia, PhD student.
+\end{itemize}
+
 \subsection{\textit{Water's gateway to heaven} project}
+
+\textit{Water's gateway to heaven} is an interdisciplinary research project funded 
+through the Life Sciences programme on Multimodal Imaging of the Vienna Science and 
+Technology Fund (WWTF) \cite{WWTF}. The project is a collaboration between three viennese 
+universities: 
+
+\begin{itemize}
+    \item Plant ecophysiologists and anatomists at the University of Natural Resources 
+    and Life Sciences \cite{BOKU}.
+    \item Plant cell biologists at the University of Vienna \cite{UVI}.
+    \item Computer scientists expert in pattern recognition and image analysis at the 
+    Vienna University of Technology (TU Wien) \cite{TUV}.
+\end{itemize}
+%
+The project focusses on the stomata, tiny pores on the surface of plant leaves. 
+Stomata open and close to provide $\mathrm{CO_2}$ for photosynthesis and to limit 
+water loss. This project uses novel temporal $3D$ imaging to provide a better description 
+of stomatal movements in order to get a mechanistic understanding of how transient 
+this movement. The goal is to answer long-standing questions about stomatal movements 
+and to generate basic knowledge on how to improve stomatal responses under dynamic 
+environments in order to increase net productivity and water-use efficiency \cite{WGH}.
          
+\section{Technical overview}
 
+The images use for this project are $3D$ images of leaves coming from high-resolution 
+X-ray micro-tomography (micro-CT) and fluorescence microscopy. The size of the images is
+$2000 \times 2000 \times 2000$ pixels. In order to track the change of the individual 
+cells over time, hierarchies of abstract topological cell complexes are used, which will
+reduce the image data to a neighboring structure of the plant cells without losing the
+relation to the original data. This makes it possible to verify hypotheses at any time
+that arise during the course of the biological analysis but may not have been known at
+the time the hierarchy was built. Furthermore, this structure of the plant cells is to be
+used to simulate dynamic processes \cite{PWGH}.
 
-
-
+\subsection{Combinatorial maps}

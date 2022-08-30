@@ -1,7 +1,17 @@
 \documentclass[12pt,a4paper]{report}
 \usepackage[pdftex]{graphicx}
-\usepackage{url} 
+\usepackage{url}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xargs}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm,amsfonts}
+\usepackage{mathtools}
 \usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
+
+\newcommandx{\diff} [2][1=x, 2=t]     {u({#1},{#2})}
+\newcommandx{\coeff}[3][1=x, 2=t, 3=k]{c({#1},{#2},{#3})}
+\newcommandx{\poly} [3][1=x, 2=t, 3=k]{\sum_{{#3}=0}^{#2} \coeff[{#1}][{#2}][{#3}] \alpha^{#3}}
 
 \begin{document}
 \renewcommand\bibname{References} 

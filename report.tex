@@ -7,11 +7,28 @@
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm,amsfonts}
 \usepackage{mathtools}
+\usepackage{sectsty}
+\usepackage{color}
+\usepackage{diagbox}
 \usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
+
+\RequirePackage{doi}
+
+\allsectionsfont{\raggedright}
+
+\captionsetup[figure]{labelfont={small,bf},textfont=small}
+\captionsetup[table]{labelfont={small,bf},textfont=small}
+
+\definecolor{green}{rgb}{0,0.5,0}
+\def\green{\color{green}}
+\definecolor{red}{rgb}{1,0,0}
+\def\red{\color{red}}
+\definecolor{blue}{rgb}{0,0,1}
+\def\blue{\color{blue}}
 
 \newcommandx{\diff} [2][1=x, 2=t]     {u({#1},{#2})}
 \newcommandx{\coeff}[3][1=x, 2=t, 3=k]{c({#1},{#2},{#3})}
-\newcommandx{\poly} [3][1=x, 2=t, 3=k]{\sum_{{#3}=0}^{#2} \coeff[{#1}][{#2}][{#3}] \alpha^{#3}}
+\newcommandx{\poly} [4][1=x, 2=t, 3=k, 4=0]{\sum_{{#3}={#4}}^{#2} \coeff[{#1}][{#2}][{#3}] \alpha^{#3}}
 
 \begin{document}
 \renewcommand\bibname{References} 

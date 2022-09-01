@@ -55,4 +55,33 @@ that arise during the course of the biological analysis but may not have been kn
 the time the hierarchy was built. Furthermore, this structure of the plant cells is to be
 used to simulate dynamic processes \cite{PWGH}.
 
-\subsection{Combinatorial maps}
+\subsection{Generalized maps}
+
+The data structure chosen for this project is the $n$-dimensional generalized map
+($n-Gmap$). An $n-Gmap$ is a combinatorial data structure allowing to describe an
+$n$-dimensional orientable or nonorientable quasi-manifold with or without boundary
+\cite{Lienhardt}. This data structure is defined by a set of darts $D$ on which act
+$n+1$ involutions $\alpha_i$ satisfying composition constraints of the following
+definition \cite{Damiand}:
+
+\begin{definition}[$n$-Gmap]
+    An $n$-Gmap with $0<n$, is an $(n+2)$-tuple $G=(D,\alpha_0,\ldots,\alpha_{n})$ where:
+    \begin{enumerate}
+        \item $D$ is a finite set of darts;
+        \item $\forall i\in\{0,\ldots,n\}:\alpha_i$ is an involution on $D$;
+        \item $\forall i\in\{0,\ldots,n-2\},\forall j\in\{i+2,\ldots,n\}:
+        \alpha_i \circ \alpha_j$ is an involution on $D$.
+    \end{enumerate}
+    \label{definition:gmap}
+\end{definition}
+
+\subsubsection{Python implementation}
+
+For the project, PRIP has provided an implementation in Python based on the algorithm 
+described in \cite{Lienhardt}. It consists in a hierarchy of classes which have their
+root in the \textit{nGmap} class, that is an array based implementation of the
+gmap, where a set of arrays is used to store the involutions (a dict based
+implementation has been provided but for our application the array based is
+better). The \textit{PixelMap} class extends \textit{nGmap} and is a 2-Gmap representing 
+an RxC image grid. The \textit{LabelMap} class extends \textit{PixelMap} and adds the 
+possibility to build a 2-Gmap representing an RxC image grid from a list of labels.

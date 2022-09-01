@@ -226,8 +226,9 @@ $L, H$) for any iteration $t$ without the need to do the intermediate
 iterations within the first wave propagation, i.e. until the front reaches the end 
 of the sequence. A simple formula for the front of the wave is:
 %
-\begin{equation}\label{eq:wavefront}
+\begin{equation}
     \diff[t][t] = (1 - \alpha^t)L + \alpha^t H
+    \label{eq:wavefront}
 \end{equation}
 %
 If $t$ is the result of the distance transform, then the value of the wavefront can be
@@ -342,6 +343,7 @@ the leaf cells border. Indeed, to know the concentration of the leaf cells, we d
 compute the diffusion values for the other parts of the leaf.
 
 \subsection{Stomata's movement}
+\label{sec:stomata}
 
 \begin{figure}[h]
     \centering

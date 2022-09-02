@@ -58,7 +58,7 @@ used to simulate dynamic processes \cite{PWGH}.
 \subsection{Generalized maps}
 
 The data structure chosen for this project is the $n$-dimensional generalized map
-($n-Gmap$). An $n-Gmap$ is a combinatorial data structure allowing to describe an
+($n$-Gmap). An $n$-Gmap is a combinatorial data structure allowing to describe an
 $n$-dimensional orientable or nonorientable quasi-manifold with or without boundary
 \cite{Lienhardt}. This data structure is defined by a set of darts $D$ on which act
 $n+1$ involutions $\alpha_i$ satisfying composition constraints of the following
@@ -77,11 +77,35 @@ definition \cite{Damiand}:
 
 \subsubsection{Python implementation}
 
-For the project, PRIP has provided an implementation in Python based on the algorithm 
+For the project, PRIP has provided an implementation in Python based on the algorithms 
 described in \cite{Lienhardt}. It consists in a hierarchy of classes which have their
 root in the \textit{nGmap} class, that is an array based implementation of the
-gmap, where a set of arrays is used to store the involutions (a dict based
-implementation has been provided but for our application the array based is
-better). The \textit{PixelMap} class extends \textit{nGmap} and is a 2-Gmap representing 
-an RxC image grid. The \textit{LabelMap} class extends \textit{PixelMap} and adds the 
-possibility to build a 2-Gmap representing an RxC image grid from a list of labels.
+gmap, where a set of arrays is used to store the involutions. The \textit{PixelMap} class 
+extends \textit{nGmap} and is a 2-Gmap representing an RxC image grid. The 
+\textit{LabelMap} class extends \textit{PixelMap} and adds the possibility to build a 
+2-Gmap representing an RxC image grid from a list of labels. This last class is very
+useful for the project because it allows to convert the micro-CT images into a 2-Gmap
+with the labels of the different leaf cells. After that we can easily make operations
+on this 2-Gmap and apply image processing algorithms on it.
+
+\subsection{Geodesic Distance Transform}
+
+The Geodesic Distance Transform (GDT) computes distances within the connected
+component of interest in a labeled image. The objects of interest are considered as
+the foreground objects and the remaining objects are considered as background.
+The computation of the GDT in a Gmap can be done in parallel with a logarithmic
+time complexity \cite{Banaeyan}. We can compute the GDT on a labeled leaf image
+to know the distance between the stomata and the mesophyll cells where the 
+photosynthesis takes place. The stomata act as gates to control the amount of
+$\mathrm{CO_2}$ that is released. The $\mathrm{CO_2}$ propagates through the
+airspace to reach the mesophyll cells. On the figure (\ref{fig:gdt}) we inialized
+the seed label as the stomata connected component and we computed the GDT
+on the airspace propagation label and mesophyll cells as the target label.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/dt_color.pdf}
+    \caption{GDT from stomata to mesophyll cells through the airspace}
+    \label{fig:gdt}
+\end{figure}
+

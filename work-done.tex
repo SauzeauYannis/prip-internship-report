@@ -16,59 +16,59 @@ the purpose of the project and the code was in several files, whereas we wanted 
 keep the code as simple as possible in one notebook. So I created this notebook to
 combine all the usefful and documented functions in one place.
 
-\subsubsection{New representation on a $n$-Gmap}
+\subsubsection{New display on a $n$-Gmap}
 
 \begin{figure}[ht]
     \centering
     \begin{subfigure}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/gmap_dt_old.png}
-        \caption{Old representation}
+        \caption{Old display}
         \label{fig:gmap_dt_old}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/gmap_dt_new.png}
-        \caption{New representation}
+        \caption{New display}
         \label{fig:gmap_dt_new}
     \end{subfigure}
-    \caption{Different representations of the distance transform on a $n$-Gmap}
+    \caption{Different display of the distance transform on a $n$-Gmap}
     \label{fig:gmap_dt}
 \end{figure}
 
-The representation of the distance transform was changed to be more intuitive. On
-the figure (\ref{fig:gmap_dt_old}) the distance transform is represented as a
+The display of the distance transform was changed to be more intuitive. On
+the \textbf{Figure \ref{fig:gmap_dt_old}} the distance transform is display as a
 $n$-Gmap with the distance values on the dart. It's hard to see the variation of the
-distance values. The new representation is shown in the figure (\ref{fig:gmap_dt_new}).
-This representation uses triangles for each dart showing the distance values. In
+distance values. The new display is shown in the \textbf{Figure \ref{fig:gmap_dt_new}}.
+This display uses triangles for each dart showing the distance values. In
 addition, we use the \textit{inferno} color map that is perceptually uniform with 
 monotonically increasing luminance \cite{Moreland}.
 
-\subsubsection{New representation on a leaf image}
+\subsubsection{New display on a leaf image}
 
 \begin{figure}[ht]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/leaf_dt_old.png}
-        \caption{Old representation}
+        \caption{Old display}
         \label{fig:leaf_dt_old}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.54\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/leaf_dt_new.png}
-        \caption{New representation}
+        \caption{New display}
         \label{fig:leaf_dt_new}
     \end{subfigure}
-    \caption{Different representations of the distance transform on a leaf}
+    \caption{Different display of the distance transform on a leaf}
     \label{fig:leaf_dt}
 \end{figure}
 
-On the leaf image, the representation was changed too. Before the distance transform
-was print with a black and grey color map as shown in the figure (\ref{fig:leaf_dt_old}). 
-The new representation, shown in the figure (\ref{fig:leaf_dt_new}) uses the 
+On the leaf image, the display was changed too. Before the distance transform
+was print with a black and grey color map as shown in the \textbf{Figure \ref{fig:leaf_dt_old}}. 
+The new display, shown in the \textbf{Figure \ref{fig:leaf_dt_new}} uses the 
 \textit{inferno} color map and an overlay can be seen to show the other parts of the 
 leaf image.
 
@@ -84,7 +84,7 @@ leaf image.
 The distance transform algorithm uses a wave propagation method to propagate the
 distance values. I used \textit{Click} \cite{CLICK} Python package to create a
 command line program that can be used to animate the propagation of the distance
-transform. On the figure (\ref{fig:cli}) the different options for the command line
+transform. On the \textbf{Figure \ref{fig:cli}} the different options for the command line
 program are shown. Among this options, we have the required integer for the seed
 label, it's form the pixel with this label that the wave will start propagating.
 The propagation label integer corresponds to the pixel with this label that the wave
@@ -127,6 +127,26 @@ where $\Gamma(x)$ is the set of neighbors of pixel $x$.
 
 \subsection{1D Diffusion}
 
+\subsubsection{Sequence initialization}
+
+Consider one 1D sequence of 2-connected pixels without self-intersection.
+Let's note $x$ the index along the sequence and $\diff$ the concentration at the 
+time $t$. The first half ($x \le 0$) should be filled with a high concentration
+of $\mathrm{CO_2}$, $H$, and the second half ($x > 0$) with low concentration 
+of $\mathrm{CO_2}$, $L$:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c||c|c|c|c|c|} \hline
+        $x$           & $\ldots$ &-3 &-2 &-1 & 0 & 1 & 2 & 3 & 4 & $\ldots$ \\ \hline \hline
+        $\diff[x][0]$ & $\ldots$ & H & H & H & H & L & L & L & L & $\ldots$ \\ \hline
+    \end{tabular}
+    \caption{Sequence initialization}
+    \label{tab:init}
+\end{table}
+
+\subsubsection{Diffusion equation}
+
 The diffusion equation in 1D becomes
 %
 \begin{equation}
@@ -149,24 +169,6 @@ Consequently we have for all iterations before reaching the end of the sequence:
 \begin{equation}\label{eq:symmetry}
     \diff[x] + \diff[y] = L+H \quad \mbox{ for all } x+y=1
 \end{equation}
-
-\subsubsection{Sequence initialization}
-
-Consider one 1D sequence of 2-connected pixels without self-intersection.
-Let's note $x$ the index along the sequence and $\diff$ the concentration at the 
-time $t$. The first half ($x \le 0$) should be filled with a high concentration
-of $\mathrm{CO_2}$, $H$, and the second half ($x > 0$) with low concentration 
-of $\mathrm{CO_2}$, $L$:
-
-\begin{table}[ht]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|c||c|c|c|c|c|} \hline
-        $x$           & $\ldots$ &-3 &-2 &-1 & 0 & 1 & 2 & 3 & 4 & $\ldots$ \\ \hline \hline
-        $\diff[x][0]$ & $\ldots$ & H & H & H & H & L & L & L & L & $\ldots$ \\ \hline
-    \end{tabular}
-    \caption{Sequence initialization}
-    \label{tab:init}
-\end{table}
 
 \subsubsection{Normalized formula}
 
@@ -259,7 +261,7 @@ as polynomials of $\alpha$:
 \end{table}
 
 We observe that the coefficients $L$ and $H$ are symmetric with respect to $x=0.5$ and 
-the polynomial of $L$ is $1-$ the polynomial of of $H$ for $x>0$. For $x\le0$, it's the 
+the polynomial of $L$ is $1-$ the polynomial of $H$ for $x>0$. For $x\le0$, it's the 
 opposite, i.e. the polynomial of $H$ is $1-$ the pronominal of $L$:
 %
 \begin{equation}
@@ -301,10 +303,10 @@ $x$ is the index along the sequence.
     \label{tab:coefficients}
 \end{table}
 
-Deriving the coefficients of the polynomial (Table \ref{tab:coefficients} shows the 
+Deriving the coefficients of the polynomial (\textbf{Table \ref{tab:coefficients}} shows the 
 coefficients for the first 4 time steps), we arrived at the following closed-form 
 involving binomial coefficients for negative arguments\footnote{Explaining the colored 
-entries in Table \ref{tab:coefficients}} \cite{Kronenburg}.
+entries in \textbf{Table \ref{tab:coefficients}}} \cite{Kronenburg}.
 %
 \begin{equation}
   \coeff = (-1)^{1+x+k} \binom{t}{k} \binom{2k-1}{x+k-1}
@@ -328,7 +330,7 @@ we first compute the distance transform $d(x)$ of each pixel $x \in R$ in the ai
 Afterward, we compute the coefficients $c(t,k,x)$ with $t = \max_{x \in R}d(x)$.
 Once we have the coefficients, we can compute the concentration $u(x,t)$ by
 \eqref{eq:coefficients}. The result is identical to the iterative solution and is visualized
-in figure (\ref{fig:diffusion}).
+in \textbf{Figure \ref{fig:diffusion}}.
 
 \begin{figure}[ht]
     \centering
@@ -366,15 +368,15 @@ compute the diffusion values for the other parts of the leaf.
 \end{figure}
 
 In this section we will study the effects of the movement of the stomata. Let's start 
-with a simple example. First, initialize a sequence like in Table \ref{tab:init}. The size 
+with a simple example. First, initialize a sequence like in \textbf{Table \ref{tab:init}}. The size 
 of the sequence is 20 pixels with $x \in [-9,10]$, $H=100\%$, $L=0\%$ and $t=0$ (see the 
-figure (\ref{fig:u_0})). This sequence represents a closed stoma at the position $x=0$, 
+\textbf{Figure \ref{fig:u_0}}. This sequence represents a closed stoma at the position $x=0$, 
 the pixels with negative index are the ones outside the leaf and the ones with positive 
 index are the ones inside the leaf. When $t>0$ the stoma is open. Using the iterative 
 method (\ref{eq:1D:normalized}) with $\alpha = 1$ we want to know the time $t$ when the 
 end of the sequence is near to be stabilized, i.e. that the value at the end of the 
-sequence is greater than $49\%$. This value is reached at time $t=336$ (see the figure 
-(\ref{fig:u_336})).
+sequence is greater than $49\%$. This value is reached at time $t=336$ (see the \textbf{Figure 
+\ref{fig:u_336}}).
 
 \subsubsection{Different sequence sizes}
 
@@ -389,7 +391,7 @@ stabilized state than with the sequence of 10 pixels.
 \subsubsection{Function to calculate the time taken to reach the stabilized state}
 
 The table below shows the time taken to reach the stabilized state for the first 
-sequences from 2 to 10 pixels. The figure (\ref{fig:s_time}) shows this function
+sequences from 2 to 10 pixels. The \textbf{Figure \ref{fig:s_time}} shows this function
 for sequences between 2 and 100 pixels.
 
 \begin{table}[ht]
@@ -405,7 +407,7 @@ for sequences between 2 and 100 pixels.
 Let's see if sequence of time obtained from the table can be computed from the number of 
 pixels. To know if the time to reach the stabilized state can be computed from the number 
 of pixels we can see if it's a polynomial function. To that we can compute the difference 
-table (\ref{tab:diff_s_time}). We can observe that the differences didn't converge to a 
+\textbf{Table \ref{tab:diff_s_time}}. We can observe that the differences didn't converge to a 
 constant value. This is because the time to reach the stabilized state is not a polynomial 
 function.
 
@@ -441,9 +443,9 @@ function.
 We want to know if the stabilized state is reached faster when the stomata close after
 few iterations. We start with a sequence of 100 pixels and we want to know the number
 of iterations needed to the end of the sequence reach the value of 25\% when the stoma
-is always open end when the stoma close after few iterations. When the stoma is open
-we need time $t=1894$ to reach the value of 25\%. On the figure 
-(\ref{fig:s_time_close}), we can see that for reaching the value of 25\% the stoma
+is always open and when the stoma close after few iterations. When the stoma is open
+we need time $t=1894$ to reach the value of 25\%. On the \textbf{Figure 
+\ref{fig:s_time_close}}, we can see that for reaching the value of 25\% the stoma
 need to be close after time $t=986$. When the stoma closes at time $t=1000$, we need 
 $t=4000$ to reach the value of 25\%, i.e. more than two times the time needed to reach
 the same value when the stoma is open. More the stoma takes time to close, less we 
@@ -487,11 +489,11 @@ With $\Gamma(x,y)$ the set of all the pixels that are connected to the pixel $(x
 %
 Now we can compute the diffusion for the 2D sequence and compare the results with the 
 1D sequence. For the computation we will take $\alpha = 1$ and $t = 100$. The results
-(figure (\ref{fig:diff_1d_vs_2d_100})) show that with the same alpha, the diffusion
+(\textbf{Figure \ref{fig:diff_1d_vs_2d_100}}) show that with the same alpha, the diffusion
 is two time faster in the 1D sequence than in the 2D sequence. It's understandable since
 the 1D diffusion only propagate in two directions and the 2D diffusion propagate in four
 directions. When we compare the results of the first iterations in the 1D and 2D sequences
-with the table (\ref{tab:1D:result_a0d5}) in 1D and table (\ref{tab:result_2d_1a}) in 2D,
+with the \textbf{Table \ref{tab:1D:result_a0d5}} in 1D and \textbf{Table \ref{tab:result_2d_1a}} in 2D,
 we can see similarity. For instance, $u_{2D}(1,y,1)=u_{1D}(2,2)$, $u_{2D}(1,y,2)=u_{1D}(2,4)$,
 or $u_{2D}(2,y,2)=u_{1D}(4,4)$. We can generalize by the formula:
 
@@ -536,7 +538,7 @@ and $u_{2D}(x,y-1,t)=u_{2D}(x,y,t)=u_{2D}(x,y+1,t)$.
     \label{tab:result_2d_1a}
 \end{table}
 
-\subsubsection{General 2D formula}
+\subsubsection{General 2D formula along the x-axis}
 
 \begin{figure}[ht]
     \centering
@@ -558,11 +560,12 @@ and $u_{2D}(x,y-1,t)=u_{2D}(x,y,t)=u_{2D}(x,y+1,t)$.
 \end{figure}
 
 The shape of stomata is like a funnel, so let's create a 2D sequence of size $100 
-\times 100$ that looks like a funnel. The figure (\ref{fig:diff_2d_fnl_init}) shows the 
+\times 100$ that looks like a funnel. The \textbf{Figure \ref{fig:diff_2d_fnl_init}} shows the 
 initial sequence. Here the formula \eqref{eq:2D_1D_basic} is not working, but we can find
-a formula that works for every pixel. Let's start some observations. On the first step 
-for the 1D diffusion we can isolate two different configurations that makes changes in 
-the sequence. Each of this configuration leads to four variations in the 2D sequence:
+a formula that works for every pixel along the x-axis. Let's start some observations. 
+On the first step  for the 1D diffusion we can isolate two different configurations that 
+makes changes in the sequence. Each of this configuration leads to four variations in the 
+2D sequence:
 
 \begin{figure}[ht]
     \centering
@@ -590,7 +593,7 @@ the sequence. Each of this configuration leads to four variations in the 2D sequ
     only if one of the neighbor is $H$ and the other is $L$. If both neighbors are $H$
     the value at $t=1$ is the same of the value at $t=0$. Taking in consideration the
     case when $u(x,0) \neq u(x,1)$, we want to know the similarity between the 1D and 2D
-    sequences. In the figure (\ref{fig:HHL_1D_to_2D}) we can see that the 1D sequence
+    sequences. In the \textbf{Figure \ref{fig:HHL_1D_to_2D}} we can see that the 1D sequence
     can be represented as four 2D sequences whose two sequences has the same number of 
     neighbors $H$ and $L$. So we will defined the similarities between the 1D and 2D.
     Let's defined $N_H$ and $N_L$ as the number of neighbors $H$ and $L$ in the 2D sequence.
@@ -602,7 +605,7 @@ the sequence. Each of this configuration leads to four variations in the 2D sequ
         \label{eq:2D_1D_H}
     \end{equation}
     
-    \item Second configuration when $u(x,0)=L$ (figure (\ref{fig:HLL_1D_to_2D})):
+    \item Second configuration when $u(x,0)=L$ (\textbf{Figure \ref{fig:HLL_1D_to_2D}}):
     
     The observations are the same as the first configuration, but we need to subtract 
     $N_L$ from $N_H$ to get the correct value. Let's note this subtraction as 
@@ -617,8 +620,8 @@ the sequence. Each of this configuration leads to four variations in the 2D sequ
 \subsubsection{2D formula using the 1D formula}
 
 To summarize, we can find a formula to compute the value of concentration $u_{2D}(x,y,t)$
-in the 2D sequence with the value of concentration $u_{1D}(x,t)$ in the 1D sequence. The
-formula can be written as:
+in the 2D sequence along the x-axis with the value of concentration $u_{1D}(x,t)$ in the 
+1D sequence. The formula can be written as:
 
 \begin{equation}
     u_{2D}(x,y,t)=u_{1D}(\Delta_N x,|\Delta_N|t) 
